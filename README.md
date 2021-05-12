@@ -4,6 +4,20 @@ Angular app built to display various Sisense embed options.
 
 Make sure any new branches or clones include License. 
 
+## TODO
+# Essentials
+1. Create config file so it's not locked to my instance. 
+2. Make all dashboards and widgets variables that come from config. 
+3. Utilize API's to fetch dashboards and widgets so that anything can be easily utilized. 
+
+# Features
+1. Add date slider
+2. When changing color of angular css have it modify theme of sisense visualizations. 
+3. Add additional buttons.
+
+# Design
+1. Make everything look better...
+
 ## Table of Contents
 * [Browser Support](#browser-support)
 * [Resources](#resources)
