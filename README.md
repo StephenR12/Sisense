@@ -33,7 +33,7 @@ Make sure any new branches or clones include License.
 3. Add additional buttons.
 
 ### Design
-1. Make everything look better...
+1. Enhance design elements...
 
 ## Browser Support
 
