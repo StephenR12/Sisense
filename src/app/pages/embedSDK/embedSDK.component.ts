@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { AppConfigService } from '../../services/app-config.service'
+
 import Chart from 'chart.js';
 
 declare let embedSDK: any;
@@ -10,15 +12,21 @@ declare let embedSDK: any;
 })
 export class EmbedSDKComponent implements OnInit {
 
-  constructor(public sanitizer: DomSanitizer) { }
+  configUrl: string;
+  configDashboard: string;
+  
+  constructor(public sanitizer: DomSanitizer, private appConfigService: AppConfigService) { }
 
   ngOnInit() {
+
+    this.configUrl = this.appConfigService.server;
+    this.configDashboard = this.appConfigService.dashboard;
 
     const { SisenseFrame, enums } = window['sisense.embed'];
 
     let sisenseFrame = new SisenseFrame({
-      url: 'https://stephen.sisensepoc.com',
-      dashboard: "5fca9190ef069e002b5f4c3f",
+      url: this.configUrl,
+      dashboard: this.configDashboard,
       settings: {
         showToolbar: false,
         showLeftPane: false,

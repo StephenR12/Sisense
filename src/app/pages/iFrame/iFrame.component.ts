@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { AppConfigService } from '../../services/app-config.service'
 
 import Chart from 'chart.js';
 
@@ -12,22 +13,37 @@ export class IFrameComponent implements OnInit {
   public clicked1: boolean = false;
   public clicked2: boolean = false;
 
-  basePath: string = "https://stephen.sisensepoc.com/app/main#/dashboards/";
-  dashboard: string = "5fca9190ef069e002b5f4c3f";
+  //Config Variables
+  configUrl: string;
+  configDashboard: string;
+  configWidgets: string[];
 
-  urlSales: string = this.buildUrl(this.basePath,this.dashboard,"/widgets/6070bd3d9ce0ea002dcc38e9?embed=true");
+  //Created URL iframes for widgets
+  urlSales: string;
   urlSalesSafe: SafeResourceUrl;
-  urlStability: string = this.buildUrl(this.basePath,this.dashboard,"/widgets/6070bfa89ce0ea002dcc38ed?embed=true");
+  urlStability: string;
   urlStabilitySafe: SafeResourceUrl;
-  urlCustomers: string = this.buildUrl(this.basePath,this.dashboard,"/widgets/6074ee359ce0ea002dcc38f3?embed=true");
+  urlCustomers: string;
   urlCustomersSafe: SafeResourceUrl;
-  urlSin: string = this.buildUrl(this.basePath,this.dashboard,"/widgets/6074f77c9ce0ea002dcc38fd?embed=true");
+  urlSin: string;
   urlSinSafe: SafeResourceUrl;
 
-  constructor(public sanitizer: DomSanitizer) {}
+  constructor(public sanitizer: DomSanitizer, private appConfigService: AppConfigService) {}
 
   ngOnInit() {
+
+    //Get inputs from configuration 
+    this.configUrl = this.appConfigService.server;
+    this.configDashboard = this.appConfigService.dashboard;
+    this.configWidgets = this.appConfigService.widgetsList;
+
+    //Generating Urls
+    this.urlSales = this.buildUrl(this.configUrl,this.configDashboard,this.configWidgets[0]);
+    this.urlStability = this.buildUrl(this.configUrl,this.configDashboard,this.configWidgets[1]);
+    this.urlCustomers = this.buildUrl(this.configUrl,this.configDashboard,this.configWidgets[2]);
+    this.urlSin = this.buildUrl(this.configUrl,this.configDashboard,this.configWidgets[3]);
     
+    //Creating safe resource url
     this.urlSalesSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.urlSales);
     this.urlStabilitySafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.urlStability);
     this.urlCustomersSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.urlCustomers);
@@ -35,7 +51,7 @@ export class IFrameComponent implements OnInit {
   }
 
   buildUrl(basePath: string, dashboard: string, widgetId: string) {
-    return basePath + dashboard + widgetId;
+    return basePath + '/app/main#/dashboards/' + dashboard + '/widgets/' + widgetId + '?embed=true';
   }
 
 }

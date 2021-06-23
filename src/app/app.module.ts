@@ -14,6 +14,9 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { AppRoutingModule } from "./app-routing.module";
 import { ComponentsModule } from "./components/components.module";
 
+import { APP_INITIALIZER } from '@angular/core';
+import { AppConfigService } from './services/app-config.service';
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -26,7 +29,19 @@ import { ComponentsModule } from "./components/components.module";
     ToastrModule.forRoot()
   ],
   declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      multi: true,
+      deps: [AppConfigService],
+      useFactory: (appConfigService: AppConfigService) => {
+        return () => {
+          //Make sure to return a promise!
+          return appConfigService.loadAppConfig();
+        };
+      }
+    }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

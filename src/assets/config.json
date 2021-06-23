@@ -1,5 +1,5 @@
 {
-    "server": "https://stephen.sisensepoc.com/",
+    "server": "https://stephen.sisensepoc.com",
     "username": "stephen.robb@sisense.com",
     "password": "password",
     "skippedWidgetTypes": ["richtexteditor"],
