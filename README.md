@@ -20,6 +20,8 @@ Make sure any new branches or clones include License.
 5. Then: ```npm install```
 6. And: ```ng serve```
 7. Navigate to: [http://localhost:4200/](http://localhost:4200/)
+8. Update src/assets/config.json to your sisense instance.
+9. Replace the 4 preconfigured widgets with four of yours. 
 
 ## TODO
 ### Essentials
