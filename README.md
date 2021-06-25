@@ -28,6 +28,7 @@ Make sure any new branches or clones include License.
 1. Create config file so it's not locked to my instance. 
 2. Make all dashboards and widgets variables that come from config. 
 3. Utilize API's to fetch dashboards and widgets so that anything can be easily utilized. 
+4. Load iframes after they have been generated without white screen.
 
 ### Features
 1. Add date slider
