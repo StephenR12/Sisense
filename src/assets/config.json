@@ -1,7 +1,5 @@
 {
     "server": "https://stephen.sisensepoc.com",
-    "username": "stephen.robb@sisense.com",
-    "password": "password",
     "skippedWidgetTypes": ["richtexteditor"],
     "dashboard": "5fca9190ef069e002b5f4c3f",
     "widgetsList": [

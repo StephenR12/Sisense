@@ -84,8 +84,10 @@ export class SisenseJSComponent {
 
         app.dashboards.load(ws.configDashboard)
           .then(function (dash) {
-            // replace with your widgets' id
-            // and make this for each of your widgets
+            app.setTheme('609998ea704be000366484bc').then(function() {
+              console.log('new theme applied');
+            });
+
             const widgets = [
               { id: ws.configWidgets[0], containerId: 'widget1' },
               { id: ws.configWidgets[1], containerId: 'widget2' },
@@ -95,7 +97,7 @@ export class SisenseJSComponent {
             widgets.forEach((w) => {
               dash.widgets.get(w.id).container = document.getElementById(w.containerId);
             });
-
+            
             // refresh your dashboard   
             dash.refresh();
           });
